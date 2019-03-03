@@ -8,8 +8,8 @@ webuploader分片上传续传秒传.NET
 ## 秒传
 ![秒传](img/finished.gif)
 
-##前端实现
-#####1、在webuploader钩子函数beforeSendFile中获取文件的md5值，并验证文件
+## 前端实现
+##### 1、在webuploader钩子函数beforeSendFile中获取文件的md5值，并验证文件
 ```javascript
  beforeSendFile: function (file) {
     var deferred = $.Deferred()
@@ -58,7 +58,7 @@ webuploader分片上传续传秒传.NET
     return deferred.promise();
 }
 ```
-#####2、在webuploader钩子函数beforeSend中处理需要上传的分片文件
+##### 2、在webuploader钩子函数beforeSend中处理需要上传的分片文件
 ```javascript
 beforeSend: function (block) {//每个chunk文件上传前调用
     var file = block.file,
@@ -74,7 +74,7 @@ beforeSend: function (block) {//每个chunk文件上传前调用
 
 }
 ```
-#####3、上传成功，合并文件
+##### 3、上传成功，合并文件
 ```javascript
  uploader.on('uploadSuccess', function (file, res) {
     uploader.removeFile(file, true);
@@ -96,8 +96,8 @@ beforeSend: function (block) {//每个chunk文件上传前调用
 });
 ```
 
-##后端实现
-#####1、检测文件是否已经上传，如果没上传则获取已经上传的分片数量
+## 后端实现
+##### 1、检测文件是否已经上传，如果没上传则获取已经上传的分片数量
 ```csharp
 public ActionResult CheckFullFile()
 {
@@ -140,7 +140,7 @@ public ActionResult CheckFullFile()
     }
 } 
 ```
-#####2、上传分片文件
+##### 2、上传分片文件
 ```csharp
 public ActionResult Upload(HttpPostedFileBase file)
 {
@@ -176,7 +176,7 @@ public ActionResult Upload(HttpPostedFileBase file)
     }
 }
 ```
-#####3、合并文件 并删除分片文件
+##### 3、合并文件 并删除分片文件
 ```csharp
 public ActionResult MergeFiles()
 {
