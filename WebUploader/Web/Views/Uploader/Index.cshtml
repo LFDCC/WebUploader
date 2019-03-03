@@ -35,7 +35,7 @@
             .progress label {
                 position: absolute;
                 top: 0;
-                left: 0; 
+                left: 0;
             }
 
         li {
@@ -63,8 +63,12 @@
                 var deferred = $.Deferred()
                     , fileObj = $('#' + file.id);
 
-                uploader.md5File(file, 0, 5 * 1024 * 1024)    //获取文件区间的md5值（0-5M）不填区间值获取整个文件的md5值（IE9及以下md5巨慢）
+                uploader.md5File(file, 0, 5 * 1024 * 1024)
+                    //获取文件区间的md5值（0-5M）不填区间值获取整个文件的md5值
+                    //IE9及以下会用flash把整个文件流都读到内存中，所以flash下设置区间是无效的，都很慢
+
                     // 及时显示进度
+                    // jq3.x版本不进progress方法
                     .progress(function (percentage) {
                         fileObj.find('.progress span').width(percentage * 100 + "%")
                         fileObj.find('.progress label').text("正在验证文件：" + parseInt(percentage * 100) + "%");
@@ -105,7 +109,7 @@
                 var file = block.file,
                     deferred = $.Deferred();
 
-                //如果服务端的分片文件序号没有被人为破坏，可以不用每次都检查分片文件，在beforesendfile验证文件是否存在时 同时获取分片数量
+                //如果不能保证已经上传的分片文件被人为破坏,就需要每次上传分片都检测一下分片的完整性
                 if (block.chunk < file.uploadedChunkNums) {
                     deferred.reject();
                 } else {
@@ -166,9 +170,9 @@
                 $.post('/Uploader/MergeFiles', { md5: file.md5, ext: file.ext },
                     function (data) {
                         if (data.isMerge) {
-                            console.info('上传成功！');
+                            console.info('合并成功！');
                         } else {
-                            console.info('上传失败！');
+                            console.info('合并失败！');
                         }
                     });
             }

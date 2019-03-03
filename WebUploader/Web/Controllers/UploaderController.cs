@@ -65,7 +65,7 @@ namespace Web.Controllers
             }
             catch (Exception e)
             {
-                return Json(new { isCheck = false }, JsonRequestBehavior.AllowGet);
+                return Json(new { ifExist = false }, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion
