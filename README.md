@@ -17,7 +17,7 @@ webuploader分片上传续传秒传.NET
 
     uploader.md5File(file, 0, 5 * 1024 * 1024)    
         //获取文件区间的md5值（0-5M）不填区间值获取整个文件的md5值
-        //IE9及以下会用flash把整个文件流都读到内存中，所以flash下设置区间是无效的，都很慢
+        //IE9及以下会用flash把整个文件流都读到内存中，再从内存中截取区间值进行md5，所以flash下获取md5值非常慢
 
         // 及时显示进度
         // jq3.x版本不进progress方法

@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -51,7 +49,6 @@
             <div id="filelist"></div>
             <div id="filePicker"></div>
         </div>
-
     </div>
     <script src="~/Scripts/webuploader/jquery.js"></script><!--jquery版本不支持3.0+ 否则md5File不进入progress-->
     <script src="~/Scripts/webuploader/webuploader.min.js"></script>
@@ -65,7 +62,7 @@
 
                 uploader.md5File(file, 0, 5 * 1024 * 1024)
                     //获取文件区间的md5值（0-5M）不填区间值获取整个文件的md5值
-                    //IE9及以下会用flash把整个文件流都读到内存中，所以flash下设置区间是无效的，都很慢
+                    //IE9及以下会用flash把整个文件流都读到内存中，再从内存中截取区间值进行md5，所以flash下获取md5值非常慢
 
                     // 及时显示进度
                     // jq3.x版本不进progress方法
@@ -136,7 +133,6 @@
 
             }
         });
-
     </script>
     <script>
         // 实例化
@@ -183,7 +179,6 @@
             fileObj.find('.progress label').text("正在上传：" + parseInt(percentage * 100) + "%");
         });
 
-
         function addFile(file) {
             var $queue = $('#filelist'),
                 $li = $('<li id="' + file.id + '">' +
@@ -193,12 +188,6 @@
 
             $li.appendTo($queue);
         }
-
-
     </script>
-
-
 </body>
 </html>
-
-
